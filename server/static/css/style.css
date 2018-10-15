@@ -1,0 +1,42 @@
+@font-face{
+  font-family: "GeosansLight.ttf";
+  src: url(../fonts/GeosansLight.ttf);
+}
+
+body, html{
+  margin: 0px;
+}
+.exit-edit-info{
+  float: right;
+}
+.main-title{
+  text-align: center;
+  font-family: "GeosansLight.ttf";
+}
+.app-container{
+  padding-left: 20px;
+}
+.popup {
+  /* position: fixed; */
+  width: 100%;
+  /* border:1px solid black; */
+  /* border-color: red; */
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0,0,0, 0.5);
+}
+.popup_inner {
+  border: 2px;
+  border:1px solid black;
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  margin: auto;
+  background: white;
+}
