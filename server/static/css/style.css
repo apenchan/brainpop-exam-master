@@ -8,6 +8,22 @@ body, html{
 }
 .exit-edit-info{
   float: right;
+  width: 10px;
+  padding: 10px;
+}
+ul {
+  list-style: none;
+}
+.space{
+  display: inline-block;
+  padding: 5px;
+}
+.info-btn{
+  border: none;
+  padding: 2px;
+}
+.info-icon{
+  width: 10px;
 }
 .main-title{
   text-align: center;

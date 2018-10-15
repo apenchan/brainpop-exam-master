@@ -84,11 +84,13 @@ class StudentsListBox extends React.Component {
   //need to pass student info to popup
   render() {
     return (
+      <div>
       <li className="student-names">
-        <div>{this.props.first_name} {this.props.last_name}<button id={this.props.id} value={this.props.id} onMouseEnter={this.onHover} onMouseLeave={this.mouseLeave}>hover me</button><button type="button" value={this.props.id} onClick={this.editStudentInfo}>Edit Me!</button></div>
+         {this.props.first_name}<div className="space">{''}</div>{this.props.last_name}<button className="info-btn" id={this.props.id} value={this.props.id} onMouseEnter={this.onHover} onMouseLeave={this.mouseLeave}><img className="info-icon" src={"https://bit.ly/2QWnCEP"}/></button><button type="button" value={this.props.id} onClick={this.editStudentInfo}>Edit Me!</button>
         {this.state.showInfo == true ? <PopUp showInfo={this.state.showInfo} studentInfo={this.state.studentInfo} mouseLeave={this.mouseLeave}/> : ""}
         {this.state.editStudent == true ? <EditStudent studentInfo={this.state.studentInfo} exitInfoBox={this.exitInfoBox}/> : ""}
       </li>
+      </div>
     )
   }
 }
