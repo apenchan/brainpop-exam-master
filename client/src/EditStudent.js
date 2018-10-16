@@ -7,10 +7,11 @@ class EditStudent extends React.Component{
     })
   }
   render(){
+    let admin = sessionStorage.getItem('username');
     return(
       <div className="popup">
       <div className="popup_inner">
-      {this.EditStudentInfo()}
+        {this.EditStudentInfo()}
       </div>
       </div>
     )
