@@ -7,7 +7,7 @@ class DropdownBar extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      classes: []
+      classes: JSON.parse(localStorage.getItem('classes')) || []
     }
   }
   //here is where I should do my GET request
@@ -17,6 +17,8 @@ class DropdownBar extends React.Component{
     axios.get(classesList)
     .then(response=>{
       console.log(response.data)
+      localStorage.setItem("classes", JSON.stringify(response.data));
+      localStorage.getItem('classes');
       currentComponent.setState({ classes: response.data })
       return classesList;
       })

@@ -11685,14 +11685,6 @@ var StudentsList = function (_React$Component) {
         return _react2.default.createElement(_StudentsListBox2.default, _extends({ key: index }, params, { search: _this2.state.search, filterStudents: _this2.filterStudents }));
       });
     }
-
-    // filteredStudents = () =>{
-    //   this.setState({
-    //     search: e.target.value,
-    //     filteredStudents: this.props.students
-    //   })
-    // }
-
   }, {
     key: 'render',
 
@@ -25900,7 +25892,7 @@ var DropdownBar = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (DropdownBar.__proto__ || Object.getPrototypeOf(DropdownBar)).call(this, props));
 
     _this.state = {
-      classes: []
+      classes: JSON.parse(localStorage.getItem('classes')) || []
     };
     return _this;
   }
@@ -25914,6 +25906,8 @@ var DropdownBar = function (_React$Component) {
       var classesList = 'https://qa.brainpop.com/devtest/api/classes';
       _axios2.default.get(classesList).then(function (response) {
         console.log(response.data);
+        localStorage.setItem("classes", JSON.stringify(response.data));
+        localStorage.getItem('classes');
         currentComponent.setState({ classes: response.data });
         return classesList;
       }).catch(function (error) {
@@ -25993,7 +25987,6 @@ var ClassList = function (_React$Component) {
       xhr.withCredentials = true;
       xhr.send(null);
       _axios2.default.get(className)
-
       // axios.get(className ,{
       //   credentials: 'include',
       // // })
@@ -26004,16 +25997,21 @@ var ClassList = function (_React$Component) {
       // })
       .then(function (response) {
         console.log(response.data);
+        localStorage.setItem("students", JSON.stringify(response.data));
+        localStorage.getItem('students');
+        console.log(JSON.stringify(response.data));
+        localStorage.getItem("students");
         _this.setState({
           students: response.data
         });
+        // localStorage.setItem("newItem", "");
       }).catch(function (error) {
         console.log('Error fetching and parsing data', error);
       });
     };
 
     _this.state = {
-      students: [],
+      students: JSON.parse(localStorage.getItem('students')) || [],
       search: ''
     };
     return _this;
@@ -26033,7 +26031,6 @@ var ClassList = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.state.students);
       return _react2.default.createElement(
         'div',
         { className: 'class-list' },

@@ -7,8 +7,8 @@ class ClassList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      students: [], 
-      search: ''
+      students: JSON.parse(localStorage.getItem('students')) || [], 
+      search: '',
     }
   }
   handleChange = (e,data) => {
@@ -19,7 +19,6 @@ class ClassList extends React.Component {
     xhr.withCredentials = true;
     xhr.send(null)
     axios.get(className)
-
     // axios.get(className ,{
     //   credentials: 'include',
     // // })
@@ -30,9 +29,14 @@ class ClassList extends React.Component {
     // })
       .then(response => {
         console.log(response.data)
+        localStorage.setItem("students", JSON.stringify(response.data));
+        localStorage.getItem('students');
+        console.log(JSON.stringify(response.data))
+        localStorage.getItem("students");
         this.setState({
           students: response.data
         })
+        // localStorage.setItem("newItem", "");
       })
       .catch(error => {
         console.log('Error fetching and parsing data', error);
@@ -44,7 +48,6 @@ class ClassList extends React.Component {
     })
   }
   render() {
-    console.log(this.state.students)
     return (
       <div className="class-list">
       <select onChange={this.handleChange}>{this.displayClass()}</select>

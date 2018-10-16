@@ -17,13 +17,6 @@ class StudentsList extends React.Component {
     return this.props.students.map((params, index) => <StudentsListBox key={index} {...params} search={this.state.search} filterStudents={this.filterStudents}/>)
   }
 
-  // filteredStudents = () =>{
-  //   this.setState({
-  //     search: e.target.value,
-  //     filteredStudents: this.props.students
-  //   })
-  // }
-
   filterStudents = (e) => {
     let filteredList = this.props.students
     console.log(e.target.value)
