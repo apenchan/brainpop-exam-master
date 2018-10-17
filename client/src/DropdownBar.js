@@ -7,6 +7,7 @@ class DropdownBar extends React.Component{
   constructor(props){
     super(props);
     this.state={
+      selected: false,
       classes: JSON.parse(localStorage.getItem('classes')) || []
     }
   }
@@ -30,7 +31,7 @@ class DropdownBar extends React.Component{
     return(
       <div className="dropdown-bar">
         <form className="dropdown-form" >
-        <ClassList classes={this.state.classes} />
+        <ClassList selected={this.state.selected} classes={this.state.classes} />
         </form>
       </div>
     )

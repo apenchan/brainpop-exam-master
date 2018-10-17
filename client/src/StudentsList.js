@@ -8,6 +8,8 @@ class StudentsList extends React.Component {
     this.state = {
       sortLastNames: false,
       lastNames: [],
+      firstName: [],
+      sortStudentsArray: [],
       isShown: false,
       filteredStudents: [],
       search: ''
@@ -17,6 +19,17 @@ class StudentsList extends React.Component {
     return this.props.students.map((params, index) => <StudentsListBox key={index} {...params} search={this.state.search} filterStudents={this.filterStudents}/>)
   }
 
+  renderFilterStudents() {
+    console.log("hellllloooo", this.state.lastNames)
+    return this.state.lastNames.map((params, index) => <StudentsListBox key={index} {...params} search={this.state.search} filterStudents={this.filterStudents}/>)
+  }
+  // sortBy = (key) =>{
+  //   let sortStudentsArray = [...this.props.students]
+  //   this.setState({
+  //     sortStudentsArray: sortStudentsArray.sort((a, b) => a < b)
+  //   })
+
+  // }
   filterStudents = (e) => {
     let filteredList = this.props.students
     console.log(e.target.value)
@@ -33,46 +46,49 @@ class StudentsList extends React.Component {
       filteredStudents: filteredList
     })
   }
-  //NEED TO COME BACK TO===================================
   //I need to sort here
-  //   sortStudents = () => {
-  //     let newArray = [...this.props.students]
-  //     let sortLastNames = this.state.sortLastNames;
-  //     let lastName;
-  //     let lastNames = this.state.lastNames
-  //     for (var i = 0; i < newArray.length; i++) {
-  //       lastName = newArray[i].last_name
-  //       lastNames.push(lastName)
-  //       lastNames.sort()
-  //       let newArray = 
-  //       console.log(lastNames.sort())
-  //     }
-  //     // return lastNames.map((params, index) => <StudentsListBox key={index} {...params} />)
-  //   }
-  //   compareObjects= (a,b) => {
-  //     let newArray= [...this.props.students]
-  //     console.log(newArray)
-  //     return b.lastName.localeCompare(a.lastName) ||
-  //     b.firstName.localeCompare(a.firstName) || 0
-  // }
-  //   handleSort = () => {
-  //     this.setState({
-  //       sortLastNames: true
-  //     })
-  //   }
+    sortStudents = () => {
+      let newArray = [...this.props.students]
+      let sortLastNames = this.state.sortLastNames;
+      let lastName;
+      let lastNames = this.state.lastNames
+      for (var i = 0; i < newArray.length; i++) {
+        console.log(newArray)
+        lastName = newArray[i].last_name
+        lastNames.push(lastName)
+        lastNames.sort()
+        // let newArray = 
+        console.log(lastNames.sort())
+
+      }
+      return lastNames
+    }
+    handleSort = () => {
+      this.setState({
+        sortLastNames: true
+      })
+    }
+    sortBy = (key) =>{
+      let lastNames = [...this.props.students]
+      console.log(lastNames)
+      console.log("I was clicked")
+      lastNames.sort((a,b) => a[key].localeCompare(b[key]))
+      // return lastNames
+      this.setState({
+        sortLastNames: true,
+        lastNames
+      })
+      return lastNames
+    }
   //============================================================
   render() {
-    let filteredStudent = this.props.students.filter(
-      (student) =>{
-        return student.last_name.indexOf(this.state.search) !== -1
-      }
-    );
+    let students = this.props.students
     return (
       <div>
         {this.props.students.length > 1 ? <input type="text" value={this.state.search} placeholder="Search Last Name" onChange={this.filterStudents} /> : ""}
-        {/* //   {this.props.students ? <button type="button" onClick={this.handleSort}>Sort by Last Name</button> : ""} */}
+       {this.props.students ? <button type="button"  onClick={()=>{this.sortBy('last_name')}}>Sort</button> : ""}
         <ul> 
-          {this.state.sortLastNames == true ? this.sortStudents() : this.renderStudents()}
+          {this.state.sortLastNames == true ? this.renderFilterStudents() : this.renderStudents()}
         </ul>
         <Filtered search={this.state.search} filterStudents={this.filterStudents} filteredStudents={this.state.filteredStudents}/>
       </div>

@@ -11636,6 +11636,8 @@ var _Filtered2 = _interopRequireDefault(_Filtered);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -11666,9 +11668,48 @@ var StudentsList = function (_React$Component) {
       });
     };
 
+    _this.sortStudents = function () {
+      var newArray = [].concat(_toConsumableArray(_this.props.students));
+      var sortLastNames = _this.state.sortLastNames;
+      var lastName = void 0;
+      var lastNames = _this.state.lastNames;
+      for (var i = 0; i < newArray.length; i++) {
+        console.log(newArray);
+        lastName = newArray[i].last_name;
+        lastNames.push(lastName);
+        lastNames.sort();
+        // let newArray = 
+        console.log(lastNames.sort());
+      }
+      return lastNames;
+    };
+
+    _this.handleSort = function () {
+      _this.setState({
+        sortLastNames: true
+      });
+    };
+
+    _this.sortBy = function (key) {
+      var lastNames = [].concat(_toConsumableArray(_this.props.students));
+      console.log(lastNames);
+      console.log("I was clicked");
+      lastNames.sort(function (a, b) {
+        return a[key].localeCompare(b[key]);
+      });
+      // return lastNames
+      _this.setState({
+        sortLastNames: true,
+        lastNames: lastNames
+      });
+      return lastNames;
+    };
+
     _this.state = {
       sortLastNames: false,
       lastNames: [],
+      firstName: [],
+      sortStudentsArray: [],
       isShown: false,
       filteredStudents: [],
       search: ''
@@ -11686,50 +11727,48 @@ var StudentsList = function (_React$Component) {
       });
     }
   }, {
-    key: 'render',
-
-    //NEED TO COME BACK TO===================================
-    //I need to sort here
-    //   sortStudents = () => {
-    //     let newArray = [...this.props.students]
-    //     let sortLastNames = this.state.sortLastNames;
-    //     let lastName;
-    //     let lastNames = this.state.lastNames
-    //     for (var i = 0; i < newArray.length; i++) {
-    //       lastName = newArray[i].last_name
-    //       lastNames.push(lastName)
-    //       lastNames.sort()
-    //       let newArray = 
-    //       console.log(lastNames.sort())
-    //     }
-    //     // return lastNames.map((params, index) => <StudentsListBox key={index} {...params} />)
-    //   }
-    //   compareObjects= (a,b) => {
-    //     let newArray= [...this.props.students]
-    //     console.log(newArray)
-    //     return b.lastName.localeCompare(a.lastName) ||
-    //     b.firstName.localeCompare(a.firstName) || 0
-    // }
-    //   handleSort = () => {
-    //     this.setState({
-    //       sortLastNames: true
-    //     })
-    //   }
-    //============================================================
-    value: function render() {
+    key: 'renderFilterStudents',
+    value: function renderFilterStudents() {
       var _this3 = this;
 
-      var filteredStudent = this.props.students.filter(function (student) {
-        return student.last_name.indexOf(_this3.state.search) !== -1;
+      console.log("hellllloooo", this.state.lastNames);
+      return this.state.lastNames.map(function (params, index) {
+        return _react2.default.createElement(_StudentsListBox2.default, _extends({ key: index }, params, { search: _this3.state.search, filterStudents: _this3.filterStudents }));
       });
+    }
+    // sortBy = (key) =>{
+    //   let sortStudentsArray = [...this.props.students]
+    //   this.setState({
+    //     sortStudentsArray: sortStudentsArray.sort((a, b) => a < b)
+    //   })
+
+    // }
+
+    //I need to sort here
+
+  }, {
+    key: 'render',
+
+    //============================================================
+    value: function render() {
+      var _this4 = this;
+
+      var students = this.props.students;
       return _react2.default.createElement(
         'div',
         null,
         this.props.students.length > 1 ? _react2.default.createElement('input', { type: 'text', value: this.state.search, placeholder: 'Search Last Name', onChange: this.filterStudents }) : "",
+        this.props.students ? _react2.default.createElement(
+          'button',
+          { type: 'button', onClick: function onClick() {
+              _this4.sortBy('last_name');
+            } },
+          'Sort'
+        ) : "",
         _react2.default.createElement(
           'ul',
           null,
-          this.state.sortLastNames == true ? this.sortStudents() : this.renderStudents()
+          this.state.sortLastNames == true ? this.renderFilterStudents() : this.renderStudents()
         ),
         _react2.default.createElement(_Filtered2.default, { search: this.state.search, filterStudents: this.filterStudents, filteredStudents: this.state.filteredStudents })
       );
@@ -25892,6 +25931,7 @@ var DropdownBar = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (DropdownBar.__proto__ || Object.getPrototypeOf(DropdownBar)).call(this, props));
 
     _this.state = {
+      selected: false,
       classes: JSON.parse(localStorage.getItem('classes')) || []
     };
     return _this;
@@ -25923,7 +25963,7 @@ var DropdownBar = function (_React$Component) {
         _react2.default.createElement(
           'form',
           { className: 'dropdown-form' },
-          _react2.default.createElement(_ClassList2.default, { classes: this.state.classes })
+          _react2.default.createElement(_ClassList2.default, { selected: this.state.selected, classes: this.state.classes })
         )
       );
     }
@@ -25951,10 +25991,6 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ClassListBox = __webpack_require__(236);
-
-var _ClassListBox2 = _interopRequireDefault(_ClassListBox);
-
 var _StudentsList = __webpack_require__(103);
 
 var _StudentsList2 = _interopRequireDefault(_StudentsList);
@@ -25970,6 +26006,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import ClassListBox from './ClassListBox';
+
 
 var ClassList = function (_React$Component) {
   _inherits(ClassList, _React$Component);
@@ -26019,6 +26057,8 @@ var ClassList = function (_React$Component) {
 
   _createClass(ClassList, [{
     key: 'displayClass',
+
+    //is value select? if not, then show "select" option
     value: function displayClass() {
       return this.props.classes.map(function (data, index) {
         return _react2.default.createElement(
@@ -26028,6 +26068,16 @@ var ClassList = function (_React$Component) {
         );
       });
     }
+    // sortBy = (key) =>{
+    //   // let lastNames = [...this.props.students]
+    //   // console.log(lastNames)
+    //   // return lastNames
+    //   this.setState({
+    //     students: this.state.students.sort((a, b) => a[key] < b[key])
+    //   })
+    //   // return lastNames
+    // }
+
   }, {
     key: 'render',
     value: function render() {
@@ -26054,31 +26104,7 @@ var ClassList = function (_React$Component) {
 exports.default = ClassList;
 
 /***/ }),
-/* 236 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// import React from 'react';
-
-// class ClassListBox extends React.Component{
-//   getValue = () =>{
-//     if(this.props.id === 1){
-//       console.log("finally gettingn it")
-//     }
-//   }
-//   render(){
-//     console.log("props props props", this.props)
-//     //here is probably where I want the GET for the student Lists
-//     return (
-//       <option value={this.props.id}>{this.props.name}{this.getValue()}</option>
-//     )
-//   }
-// }
-
-// export default ClassListBox;
-
-
-/***/ }),
+/* 236 */,
 /* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26207,13 +26233,6 @@ var StudentsListBox = function (_React$Component) {
       });
     };
 
-    _this.getAdmin = function () {
-      var admin = sessionStorage.getItem('username');
-      if (admin == "admin") {
-        console.log("I am lise");
-      }
-    };
-
     _this.state = {
       showInfo: false,
       studentInfo: [],
@@ -26226,13 +26245,10 @@ var StudentsListBox = function (_React$Component) {
   _createClass(StudentsListBox, [{
     key: 'render',
 
+
     // sort names here
     //need to pass student info to popup
     value: function render() {
-      var admin = sessionStorage.getItem('username');
-      // if(admin == "admin"){
-      //   console.log("I am lise")
-      // }
       return _react2.default.createElement(
         'div',
         null,

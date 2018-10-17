@@ -1,5 +1,5 @@
 import React from 'react';
-import ClassListBox from './ClassListBox';
+// import ClassListBox from './ClassListBox';
 import StudentsList from './StudentsList';
 import axios from 'axios';
 
@@ -11,6 +11,7 @@ class ClassList extends React.Component {
       search: '',
     }
   }
+
   handleChange = (e,data) => {
     let classes = this.props.classes;
     let className = `https://qa.brainpop.com/devtest/api/classes/` + e.target.value + `/students`
@@ -42,11 +43,21 @@ class ClassList extends React.Component {
         console.log('Error fetching and parsing data', error);
       });
   }
+  //is value select? if not, then show "select" option
   displayClass() {
     return this.props.classes.map((data, index) => {
-      return <option placeholder="Select"value={data.id} key={index}>{data.name}</option>
+      return <option placeholder="Select" value={data.id} key={index}>{data.name}</option>
     })
   }
+  // sortBy = (key) =>{
+  //   // let lastNames = [...this.props.students]
+  //   // console.log(lastNames)
+  //   // return lastNames
+  //   this.setState({
+  //     students: this.state.students.sort((a, b) => a[key] < b[key])
+  //   })
+  //   // return lastNames
+  // }
   render() {
     return (
       <div className="class-list">

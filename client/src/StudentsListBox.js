@@ -89,19 +89,10 @@ class StudentsListBox extends React.Component {
       editStudent: false
     })
   }
-  getAdmin = () =>{
-    let admin = sessionStorage.getItem('username');
-    if(admin == "admin"){
-      console.log("I am lise")
-    }
-  }
+
   // sort names here
   //need to pass student info to popup
   render() {
-    let admin = sessionStorage.getItem('username');
-    // if(admin == "admin"){
-    //   console.log("I am lise")
-    // }
     return (
       <div>
       <li className="student-names">
