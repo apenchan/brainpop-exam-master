@@ -4,18 +4,21 @@ class Filtered extends React.Component{
   constructor(props){
     super(props);
     this.state ={
-      search: ''
+      search: '',
+      showInfo: true
     }
   }
   render(){
+    console.log(this.props.filteredStudents)
     return(
-      <div>
-      <ul>
+      // <div>
+      <table>
         {this.props.search != "" ? this.props.filteredStudents.map(function(student){
-          return <li data-category={student} key={student}>{student.last_name}</li>
+          return <tr data-category={student} key={student} className="filtered-name"><td>{student.first_name} </td><td>{student.last_name}</td></tr>
         }): ""}
-      </ul>
-      </div>
+
+      </table>
+      // {/* </div> */}
     )
   }
 }

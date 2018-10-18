@@ -26176,7 +26176,7 @@ var StudentsListBox = function (_React$Component) {
     _this.onHover = function (e) {
       // e.preventDefault();
       var showInfo = _this.state.showInfo;
-      // console.log(e.target.value)
+      console.log(e.target.value);
       var studentInfo = 'https://qa.brainpop.com/devtest/api/students/' + e.target.value;
       _this.setState(function (prevState) {
         return {
@@ -26207,6 +26207,8 @@ var StudentsListBox = function (_React$Component) {
       var admin = sessionStorage.getItem('username');
       var showInfo = _this.state.showInfo;
       var editStudent = _this.state.editStudent;
+      console.log(e);
+      console.log(e.target);
       console.log(e.target.value);
       var studentInfo = 'https://qa.brainpop.com/devtest/api/students/' + e.target.value;
       if (admin == "admin") {
@@ -26278,13 +26280,9 @@ var StudentsListBox = function (_React$Component) {
           )
         ),
         _react2.default.createElement(
-          'td',
-          null,
-          _react2.default.createElement(
-            'button',
-            { className: 'edit-btn', type: 'button', value: this.props.id, onClick: this.editStudentInfo },
-            _react2.default.createElement('img', { className: 'pencil-icon', src: "https://bit.ly/2QYy0LZ" })
-          )
+          'button',
+          { type: 'button', className: 'edit-btn', value: this.props.id, id: this.props.id, onClick: this.editStudentInfo },
+          'Click me'
         ),
         this.state.showInfo == true ? _react2.default.createElement(_PopUp2.default, { showInfo: this.state.showInfo, studentInfo: this.state.studentInfo, mouseLeave: this.mouseLeave }) : "",
         this.state.editStudent == true ? _react2.default.createElement(_EditStudent2.default, { studentInfo: this.state.studentInfo, exitInfoBox: this.exitInfoBox }) : ""
@@ -26484,45 +26482,52 @@ var EditStudent = function (_React$Component) {
   }
 
   _createClass(EditStudent, [{
-    key: "EditStudentInfo",
-    value: function EditStudentInfo() {
+    key: "editStudentInfo",
+    value: function editStudentInfo() {
       var _this2 = this;
 
+      console.log("I am the props", this.props.studentInfo);
       return this.props.studentInfo.map(function (data, index) {
         return _react2.default.createElement(
-          "ul",
-          { key: index },
-          _react2.default.createElement("img", { onClick: _this2.props.exitInfoBox, src: "https://www.shareicon.net/data/128x128/2015/10/17/657408_cancel_512x512.png", className: "exit-edit-info" }),
+          "div",
+          null,
           _react2.default.createElement(
-            "li",
-            null,
-            data.username,
-            _react2.default.createElement("input", { type: "text" })
-          ),
-          _react2.default.createElement(
-            "li",
-            null,
-            data.last_name
-          ),
-          _react2.default.createElement(
-            "li",
-            null,
-            data.first_name
+            "ul",
+            { key: index },
+            _react2.default.createElement("img", { onClick: _this2.props.exitInfoBox, src: "https://www.shareicon.net/data/128x128/2015/10/17/657408_cancel_512x512.png", className: "exit-edit-info" }),
+            _react2.default.createElement(
+              "li",
+              null,
+              data.username,
+              _react2.default.createElement("input", { type: "text", placeholder: data.username })
+            ),
+            _react2.default.createElement(
+              "li",
+              null,
+              data.last_name
+            ),
+            _react2.default.createElement(
+              "li",
+              null,
+              data.first_name
+            )
           )
         );
+        // <ul key={index}><li>{data.username}</li><li>{data.last_name}</li><li>{data.first_name}</li></ul>
       });
     }
   }, {
     key: "render",
     value: function render() {
       var admin = sessionStorage.getItem('username');
+      console.log("I am student info", this.props.studentInfo);
       return _react2.default.createElement(
         "div",
         { className: "popup" },
         _react2.default.createElement(
           "div",
           { className: "popup_inner" },
-          this.EditStudentInfo()
+          this.editStudentInfo()
         )
       );
     }
@@ -26567,7 +26572,8 @@ var Filtered = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Filtered.__proto__ || Object.getPrototypeOf(Filtered)).call(this, props));
 
     _this.state = {
-      search: ''
+      search: '',
+      showInfo: true
     };
     return _this;
   }
@@ -26575,20 +26581,32 @@ var Filtered = function (_React$Component) {
   _createClass(Filtered, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
+      console.log(this.props.filteredStudents);
+      return (
+        // <div>
         _react2.default.createElement(
-          'ul',
+          'table',
           null,
           this.props.search != "" ? this.props.filteredStudents.map(function (student) {
             return _react2.default.createElement(
-              'li',
-              { 'data-category': student, key: student },
-              student.last_name
+              'tr',
+              { 'data-category': student, key: student, className: 'filtered-name' },
+              _react2.default.createElement(
+                'td',
+                null,
+                student.first_name,
+                ' '
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                student.last_name
+              )
             );
           }) : ""
         )
+        // {/* </div> */}
+
       );
     }
   }]);
