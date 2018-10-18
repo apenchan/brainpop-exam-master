@@ -5,6 +5,13 @@
 
 body, html{
   margin: 0px;
+  background-color: #009999;
+}
+.app-container{
+  margin: 30px;
+  padding-left: 20px;
+  padding-top: 20px;
+  background-color: white;
 }
 .exit-edit-info{
   float: right;
@@ -14,9 +21,21 @@ body, html{
 ul {
   list-style: none;
 }
+.select-dropdown{
+  width: 200px;
+  background-color: #009999;
+  color: white;
+}
 .space{
   display: inline-block;
   padding: 5px;
+}
+.sort-students{
+  padding: 10px;
+  display: inline-block;
+}
+.filter-students{
+  display: inline-block;
 }
 .info-btn{
   border: none;
@@ -26,20 +45,15 @@ ul {
   width: 10px;
 }
 .main-title{
+  color: white;
   text-align: center;
   font-family: "GeosansLight.ttf";
 }
-.app-container{
-  padding-left: 20px;
-}
 .popup {
-  /* position: fixed; */
   width: 100%;
-  /* border:1px solid black; */
-  /* border-color: red; */
   height: 100%;
   top: 0;
-  left: 0;
+  left: 5;
   right: 0;
   bottom: 0;
   margin: auto;
@@ -49,10 +63,26 @@ ul {
   border: 2px;
   border:1px solid black;
   position: absolute;
-  left: 25%;
-  right: 25%;
-  top: 25%;
+  left: 45%;
+  right: 15%;
+  top: 30%;
   bottom: 25%;
   margin: auto;
   background: white;
+}
+table{
+  padding-top: 20px;
+}
+th{
+  font-family: sans-serif;
+}
+td{
+  padding: 40px;
+  color: #00B3B3;
+}
+.edit-btn{
+  border: none;
+}
+.pencil-icon{
+  width: 20px;
 }

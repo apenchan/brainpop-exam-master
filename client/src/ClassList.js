@@ -49,19 +49,10 @@ class ClassList extends React.Component {
       return <option placeholder="Select" value={data.id} key={index}>{data.name}</option>
     })
   }
-  // sortBy = (key) =>{
-  //   // let lastNames = [...this.props.students]
-  //   // console.log(lastNames)
-  //   // return lastNames
-  //   this.setState({
-  //     students: this.state.students.sort((a, b) => a[key] < b[key])
-  //   })
-  //   // return lastNames
-  // }
   render() {
     return (
       <div className="class-list">
-      <select onChange={this.handleChange}>{this.displayClass()}</select>
+      <select className="select-dropdown" onChange={this.handleChange}>{this.displayClass()}</select>
       <div><StudentsList students={this.state.students}/></div>
       </div>
     )

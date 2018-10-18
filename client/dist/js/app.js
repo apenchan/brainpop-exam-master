@@ -11692,8 +11692,6 @@ var StudentsList = function (_React$Component) {
 
     _this.sortBy = function (key) {
       var lastNames = [].concat(_toConsumableArray(_this.props.students));
-      console.log(lastNames);
-      console.log("I was clicked");
       lastNames.sort(function (a, b) {
         return a[key].localeCompare(b[key]);
       });
@@ -11727,23 +11725,14 @@ var StudentsList = function (_React$Component) {
       });
     }
   }, {
-    key: 'renderFilterStudents',
-    value: function renderFilterStudents() {
+    key: 'renderSortStudents',
+    value: function renderSortStudents() {
       var _this3 = this;
 
-      console.log("hellllloooo", this.state.lastNames);
       return this.state.lastNames.map(function (params, index) {
         return _react2.default.createElement(_StudentsListBox2.default, _extends({ key: index }, params, { search: _this3.state.search, filterStudents: _this3.filterStudents }));
       });
     }
-    // sortBy = (key) =>{
-    //   let sortStudentsArray = [...this.props.students]
-    //   this.setState({
-    //     sortStudentsArray: sortStudentsArray.sort((a, b) => a < b)
-    //   })
-
-    // }
-
     //I need to sort here
 
   }, {
@@ -11757,18 +11746,44 @@ var StudentsList = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        this.props.students.length > 1 ? _react2.default.createElement('input', { type: 'text', value: this.state.search, placeholder: 'Search Last Name', onChange: this.filterStudents }) : "",
-        this.props.students ? _react2.default.createElement(
-          'button',
-          { type: 'button', onClick: function onClick() {
-              _this4.sortBy('last_name');
-            } },
-          'Sort'
-        ) : "",
         _react2.default.createElement(
-          'ul',
+          'div',
+          { className: 'filter-students' },
+          this.props.students.length > 1 ? _react2.default.createElement('input', { type: 'text', value: this.state.search, placeholder: 'Search Last Name', onChange: this.filterStudents }) : ""
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'sort-students' },
+          this.props.students ? _react2.default.createElement(
+            'button',
+            { type: 'button', className: 'sort-btn', onClick: function onClick() {
+                _this4.sortBy('last_name');
+              } },
+            'Sort'
+          ) : ""
+        ),
+        _react2.default.createElement(
+          'table',
           null,
-          this.state.sortLastNames == true ? this.renderFilterStudents() : this.renderStudents()
+          _react2.default.createElement(
+            'th',
+            null,
+            _react2.default.createElement(
+              'u',
+              null,
+              'First Name'
+            )
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            _react2.default.createElement(
+              'u',
+              null,
+              'Last Name'
+            )
+          ),
+          this.state.sortLastNames == true ? this.renderSortStudents() : this.renderStudents()
         ),
         _react2.default.createElement(_Filtered2.default, { search: this.state.search, filterStudents: this.filterStudents, filteredStudents: this.state.filteredStudents })
       );
@@ -26068,16 +26083,6 @@ var ClassList = function (_React$Component) {
         );
       });
     }
-    // sortBy = (key) =>{
-    //   // let lastNames = [...this.props.students]
-    //   // console.log(lastNames)
-    //   // return lastNames
-    //   this.setState({
-    //     students: this.state.students.sort((a, b) => a[key] < b[key])
-    //   })
-    //   // return lastNames
-    // }
-
   }, {
     key: 'render',
     value: function render() {
@@ -26086,7 +26091,7 @@ var ClassList = function (_React$Component) {
         { className: 'class-list' },
         _react2.default.createElement(
           'select',
-          { onChange: this.handleChange },
+          { className: 'select-dropdown', onChange: this.handleChange },
           this.displayClass()
         ),
         _react2.default.createElement(
@@ -26249,32 +26254,40 @@ var StudentsListBox = function (_React$Component) {
     // sort names here
     //need to pass student info to popup
     value: function render() {
+      // console.log(this.props)
       return _react2.default.createElement(
-        'div',
+        'tr',
         null,
         _react2.default.createElement(
-          'li',
-          { className: 'student-names' },
-          this.props.first_name,
-          _react2.default.createElement(
-            'div',
-            { className: 'space' },
-            ''
-          ),
-          this.props.last_name,
+          'td',
+          null,
+          this.props.first_name
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          this.props.last_name
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
           _react2.default.createElement(
             'button',
             { className: 'info-btn', id: this.props.id, value: this.props.id, onMouseEnter: this.onHover, onMouseLeave: this.mouseLeave },
             _react2.default.createElement('img', { className: 'info-icon', src: "https://bit.ly/2QWnCEP" })
-          ),
+          )
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
           _react2.default.createElement(
             'button',
-            { type: 'button', value: this.props.id, onClick: this.editStudentInfo },
-            'Edit Me!'
-          ),
-          this.state.showInfo == true ? _react2.default.createElement(_PopUp2.default, { showInfo: this.state.showInfo, studentInfo: this.state.studentInfo, mouseLeave: this.mouseLeave }) : "",
-          this.state.editStudent == true ? _react2.default.createElement(_EditStudent2.default, { studentInfo: this.state.studentInfo, exitInfoBox: this.exitInfoBox }) : ""
-        )
+            { className: 'edit-btn', type: 'button', value: this.props.id, onClick: this.editStudentInfo },
+            _react2.default.createElement('img', { className: 'pencil-icon', src: "https://bit.ly/2QYy0LZ" })
+          )
+        ),
+        this.state.showInfo == true ? _react2.default.createElement(_PopUp2.default, { showInfo: this.state.showInfo, studentInfo: this.state.studentInfo, mouseLeave: this.mouseLeave }) : "",
+        this.state.editStudent == true ? _react2.default.createElement(_EditStudent2.default, { studentInfo: this.state.studentInfo, exitInfoBox: this.exitInfoBox }) : ""
       );
     }
   }]);

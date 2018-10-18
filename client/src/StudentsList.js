@@ -19,17 +19,9 @@ class StudentsList extends React.Component {
     return this.props.students.map((params, index) => <StudentsListBox key={index} {...params} search={this.state.search} filterStudents={this.filterStudents}/>)
   }
 
-  renderFilterStudents() {
-    console.log("hellllloooo", this.state.lastNames)
+  renderSortStudents() {
     return this.state.lastNames.map((params, index) => <StudentsListBox key={index} {...params} search={this.state.search} filterStudents={this.filterStudents}/>)
   }
-  // sortBy = (key) =>{
-  //   let sortStudentsArray = [...this.props.students]
-  //   this.setState({
-  //     sortStudentsArray: sortStudentsArray.sort((a, b) => a < b)
-  //   })
-
-  // }
   filterStudents = (e) => {
     let filteredList = this.props.students
     console.log(e.target.value)
@@ -70,8 +62,6 @@ class StudentsList extends React.Component {
     }
     sortBy = (key) =>{
       let lastNames = [...this.props.students]
-      console.log(lastNames)
-      console.log("I was clicked")
       lastNames.sort((a,b) => a[key].localeCompare(b[key]))
       // return lastNames
       this.setState({
@@ -85,11 +75,17 @@ class StudentsList extends React.Component {
     let students = this.props.students
     return (
       <div>
+        <div className="filter-students">
         {this.props.students.length > 1 ? <input type="text" value={this.state.search} placeholder="Search Last Name" onChange={this.filterStudents} /> : ""}
-       {this.props.students ? <button type="button"  onClick={()=>{this.sortBy('last_name')}}>Sort</button> : ""}
-        <ul> 
-          {this.state.sortLastNames == true ? this.renderFilterStudents() : this.renderStudents()}
-        </ul>
+        </div>
+        <div className="sort-students">
+       {this.props.students ? <button type="button" className="sort-btn" onClick={()=>{this.sortBy('last_name')}}>Sort</button> : ""}
+       </div>
+        <table> 
+          <th><u>First Name</u></th>
+          <th><u>Last Name</u></th>
+          {this.state.sortLastNames == true ? this.renderSortStudents() : this.renderStudents()}
+        </table>
         <Filtered search={this.state.search} filterStudents={this.filterStudents} filteredStudents={this.state.filteredStudents}/>
       </div>
     )

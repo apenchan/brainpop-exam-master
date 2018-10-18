@@ -93,15 +93,14 @@ class StudentsListBox extends React.Component {
   // sort names here
   //need to pass student info to popup
   render() {
+    // console.log(this.props)
     return (
-      <div>
-      <li className="student-names">
-         {this.props.first_name}<div className="space">{''}</div>{this.props.last_name}<button className="info-btn" id={this.props.id} value={this.props.id} onMouseEnter={this.onHover} onMouseLeave={this.mouseLeave}><img className="info-icon" src={"https://bit.ly/2QWnCEP"}/></button>
-         <button type="button" value={this.props.id} onClick={this.editStudentInfo}>Edit Me!</button>
+      <tr>
+      <td>{this.props.first_name}</td><td>{this.props.last_name}</td><td><button className="info-btn" id={this.props.id} value={this.props.id} onMouseEnter={this.onHover} onMouseLeave={this.mouseLeave}><img className="info-icon" src={"https://bit.ly/2QWnCEP"}/></button></td>
+         <td><button className="edit-btn" type="button" value={this.props.id} onClick={this.editStudentInfo}><img className="pencil-icon" src={"https://bit.ly/2QYy0LZ"}/></button></td>
         {this.state.showInfo == true ? <PopUp showInfo={this.state.showInfo} studentInfo={this.state.studentInfo} mouseLeave={this.mouseLeave}/> : ""}
         {this.state.editStudent == true ? <EditStudent studentInfo={this.state.studentInfo} exitInfoBox={this.exitInfoBox}/> : ""}
-      </li>
-      </div>
+      </tr>
     )
   }
 }
