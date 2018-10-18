@@ -24,7 +24,7 @@ router.post('/login', passport.authenticate('local', { session: false }), functi
 	console.log('req.body: ' + req.user._id);
 	console.log('==========================');
 
-	var token = jwt.sign({user: req.user._id}, process.env.JWT_SECRET, {
+	var token = jwt.sign({user: req.user._id}, process.env.JWT_SECRET || "1234", {
 		expiresIn: 1400
 	});
 
