@@ -8,6 +8,7 @@ var user = require('./controllers/user.js');
 var mongoose = require('mongoose')
 var db = process.env.MONGODB_URI || "mongodb://localhost/brainpop-exam";
 mongoose.connect(db);
+var port = process.env.PORT || 3000;
 
 app.use(express.static('./server/static/'));
 app.use(express.static('./client/dist/'));
