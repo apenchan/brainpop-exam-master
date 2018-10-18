@@ -15,7 +15,8 @@ JwtOpts.jwtFromRequest = function(req) {
   return token;
 };
 
-JwtOpts.secretOrKey = process.env.JWT_SECRET;
+// JwtOpts.secretOrKey = process.env.JWT_SECRET;
+JwtOpts.secretOrKey = process.env.JWT_SECRET || "1234";
 
 
 passport.use(new JwtStrategy(JwtOpts, function(jwt_payload, done) {
@@ -28,7 +29,7 @@ passport.use(new JwtStrategy(JwtOpts, function(jwt_payload, done) {
         }
 
         if (user) {
-            console.log("user is " + user.username + "I am line 31!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            console.log("user is " + user.username)
             done(null, user);
         } else {
             done(null, false);
