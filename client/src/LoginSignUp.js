@@ -8,9 +8,11 @@ class LoginSignUp extends React.Component {
       <div>
       <div className="signup-login-wrapper">
         <div className="login">
+          <h3 className="login-page-header">Login to your Account</h3>
           <Login />
         </div>
         <div className="signup">
+        <h3 className="login-page-header">Create an Account</h3>
           <Signup />
         </div>
       </div>

@@ -23,6 +23,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {/* <h1 className="main-title">BrainPOP Exam</h1> */}
         <Homepage />
       </div>
     );

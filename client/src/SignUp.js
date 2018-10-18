@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-class Signup extends React.Component{
+class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,34 +25,22 @@ class Signup extends React.Component{
     }).catch(function (error) {
       console.log(error);
     });
-    console.log(this.state)
-    // this.props.createUser(this.state);
     this.setState({
       firstName: "",
       lastName: "",
       username: "",
       password: "",
     })
-
   }
-
-
   render() {
     return (
-      <div className="signup-form">
-        <div className="create-account">
-          <div className="create-title"> Create Account </div>
-          <form onSubmit={this.handleSubmit}>
-          <ul className="sign-up-vertical">
-            <li><input type="text" className="form-control signup-control" id="username" required="true" value={this.state.username} placeholder="Create Username" onChange={this.handleSignUpForm} /></li>
-            <li><input type="password" className="form-control signup-control" id="password" required="true" value={this.state.password} placeholder="Create Password" onChange={this.handleSignUpForm} /></li>
-            <li><button className="submit-event" type="submit">Create Account</button></li>
-            </ul>
-          </form>
-        </div>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" className="form-control signup-control" id="username" required="true" value={this.state.username} placeholder="Create Username" onChange={this.handleSignUpForm} />
+        <input type="password" className="form-control signup-control" id="password" required="true" value={this.state.password} placeholder="Create Password" onChange={this.handleSignUpForm} />
+        <button className="submit-event signup-control" type="submit">Create Account</button>
+      </form>
     )
-  } 
+  }
 }
 
 export default Signup;

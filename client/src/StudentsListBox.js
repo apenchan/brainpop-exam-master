@@ -64,7 +64,7 @@ class StudentsListBox extends React.Component {
     console.log(e)
     console.log(e.target)
     console.log(e.target.value)
-    let studentInfo= `https://qa.brainpop.com/devtest/api/students/` + e.target.value
+    let studentInfo= `https://qa.brainpop.com/devtest/api/students/` + e.currentTarget.value
     if (admin == "admin") {
       this.setState(prevState => ({
         editStudent: !prevState.editStudent
@@ -100,8 +100,8 @@ class StudentsListBox extends React.Component {
       <tr>
         <td>{this.props.first_name}</td><td>{this.props.last_name}</td>
         <td><button className="info-btn" id={this.props.id} value={this.props.id} onMouseEnter={this.onHover} onMouseLeave={this.mouseLeave}><img className="info-icon" src={"https://bit.ly/2QWnCEP"} /></button></td>
-        <td><button type="button" className="edit-btn" value={this.props.id} id={this.props.id} onClick={this.editStudentInfo}>Click me</button></td>
-        {/* <button type="button" className="edit-btn" value={this.props.id} id={this.props.id} onClick={this.editStudentInfo}><img value={this.props.id} id={this.props.value} className="pencil-icon" src={"https://bit.ly/2QYy0LZ"} /></button> */}
+        {/* <td><button type="button" className="edit-btn" value={this.props.id} id={this.props.id} onClick={this.editStudentInfo}>Edit</button></td> */}
+        <td><button type="button" className="edit-btn" value={this.props.id} id={this.props.id} onClick={this.editStudentInfo}><img value={this.props.id} id={this.props.value} className="pencil-icon" src={"https://bit.ly/2QYy0LZ"} /></button></td>
         {this.state.showInfo == true ? <PopUp showInfo={this.state.showInfo} studentInfo={this.state.studentInfo} mouseLeave={this.mouseLeave} /> : ""}
         {this.state.editStudent == true ? <EditStudent studentInfo={this.state.studentInfo} exitInfoBox={this.exitInfoBox} /> : ""}
       </tr>

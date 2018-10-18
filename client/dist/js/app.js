@@ -11849,11 +11849,21 @@ var LoginSignUp = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'login' },
+            _react2.default.createElement(
+              'h3',
+              { className: 'login-page-header' },
+              'Login to your Account'
+            ),
             _react2.default.createElement(_LoginForm2.default, null)
           ),
           _react2.default.createElement(
             'div',
             { className: 'signup' },
+            _react2.default.createElement(
+              'h3',
+              { className: 'login-page-header' },
+              'Create an Account'
+            ),
             _react2.default.createElement(_Signup2.default, null)
           )
         )
@@ -12813,6 +12823,11 @@ var AppWrapper = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'container' },
+            _react2.default.createElement(
+              'h1',
+              { className: 'main-title' },
+              'BrainPOP Exam'
+            ),
             _react2.default.createElement(_Routes2.default, null)
           )
         )
@@ -25882,11 +25897,6 @@ var Homepage = function (_React$Component) {
         'div',
         { className: 'main-container' },
         _react2.default.createElement(
-          'h1',
-          { className: 'main-title' },
-          'BrainPOP Exam'
-        ),
-        _react2.default.createElement(
           'div',
           { className: 'app-container' },
           _react2.default.createElement(_DropdownBar2.default, null)
@@ -26210,7 +26220,7 @@ var StudentsListBox = function (_React$Component) {
       console.log(e);
       console.log(e.target);
       console.log(e.target.value);
-      var studentInfo = 'https://qa.brainpop.com/devtest/api/students/' + e.target.value;
+      var studentInfo = 'https://qa.brainpop.com/devtest/api/students/' + e.currentTarget.value;
       if (admin == "admin") {
         _this.setState(function (prevState) {
           return {
@@ -26285,7 +26295,7 @@ var StudentsListBox = function (_React$Component) {
           _react2.default.createElement(
             'button',
             { type: 'button', className: 'edit-btn', value: this.props.id, id: this.props.id, onClick: this.editStudentInfo },
-            'Click me'
+            _react2.default.createElement('img', { value: this.props.id, id: this.props.value, className: 'pencil-icon', src: "https://bit.ly/2QYy0LZ" })
           )
         ),
         this.state.showInfo == true ? _react2.default.createElement(_PopUp2.default, { showInfo: this.state.showInfo, studentInfo: this.state.studentInfo, mouseLeave: this.mouseLeave }) : "",
@@ -26304,73 +26314,38 @@ exports.default = StudentsListBox;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+// import React from 'react';
+// import axios from 'axios';
 
+// class GetStudentInfo extends React.Component{
+//   constructor(props){
+//     super(props);
+//     this.state={
+//       showInfo: false
+//     }
+//   }
+//   handleShow = (e) => {
+//     e.preventDefault();
+//     let showInfo = this.state.showInfo;
+//     console.log(e.target)
+//     this.setState({
+//       showInfo: !this.state.showInfo
+//     })
+//     if(showInfo == true){
+//       console.log("i am true")
+//     }
+//   }
+//   render(){
+//     console.log(this.state.showInfo)
+//     console.log("student props", this.props)
+//     return (
+//       <button type="button" onClick={this.handleShow}>Click me!</button>
+//     )
+//   }
+// }
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+// export default GetStudentInfo;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _axios = __webpack_require__(20);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var GetStudentInfo = function (_React$Component) {
-  _inherits(GetStudentInfo, _React$Component);
-
-  function GetStudentInfo(props) {
-    _classCallCheck(this, GetStudentInfo);
-
-    var _this = _possibleConstructorReturn(this, (GetStudentInfo.__proto__ || Object.getPrototypeOf(GetStudentInfo)).call(this, props));
-
-    _this.handleShow = function (e) {
-      e.preventDefault();
-      var showInfo = _this.state.showInfo;
-      console.log(e.target);
-      _this.setState({
-        showInfo: !_this.state.showInfo
-      });
-      if (showInfo == true) {
-        console.log("i am true");
-      }
-    };
-
-    _this.state = {
-      showInfo: false
-    };
-    return _this;
-  }
-
-  _createClass(GetStudentInfo, [{
-    key: 'render',
-    value: function render() {
-      console.log(this.state.showInfo);
-      console.log("student props", this.props);
-      return _react2.default.createElement(
-        'button',
-        { type: 'button', onClick: this.handleShow },
-        'Click me!'
-      );
-    }
-  }]);
-
-  return GetStudentInfo;
-}(_react2.default.Component);
-
-exports.default = GetStudentInfo;
 
 /***/ }),
 /* 239 */
@@ -26412,27 +26387,67 @@ var PopUp = function (_React$Component) {
       return this.props.studentInfo.map(function (data, index) {
         return _react2.default.createElement(
           "ul",
-          { key: index },
+          { className: "data-ul", key: index },
           _react2.default.createElement(
             "li",
-            null,
+            { className: "li-title" },
+            _react2.default.createElement(
+              "strong",
+              null,
+              "Username"
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "data-info" },
             data.username
           ),
+          _react2.default.createElement("br", null),
           _react2.default.createElement(
             "li",
-            null,
+            { className: "li-title" },
+            _react2.default.createElement(
+              "strong",
+              null,
+              "Last Name"
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "data-info" },
             data.last_name
           ),
+          _react2.default.createElement("br", null),
           _react2.default.createElement(
             "li",
-            null,
-            data.first_name
+            { className: "li-title" },
+            _react2.default.createElement(
+              "strong",
+              null,
+              "First Name"
+            )
           ),
           _react2.default.createElement(
             "li",
-            null,
+            { className: "data-info" },
+            data.first_name
+          ),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
+            "li",
+            { className: "li-title" },
+            _react2.default.createElement(
+              "strong",
+              null,
+              "Age"
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "data-info" },
             data.age
-          )
+          ),
+          _react2.default.createElement("br", null)
         );
       });
     }
@@ -26445,6 +26460,11 @@ var PopUp = function (_React$Component) {
         _react2.default.createElement(
           "div",
           { className: "popup_inner" },
+          _react2.default.createElement(
+            "h3",
+            { className: "student-info-box-header" },
+            "Student Information"
+          ),
           this.displayStudentInfo()
         )
       );
@@ -26535,7 +26555,7 @@ var EditStudent = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'li',
-                null,
+                { className: 'edit-title-name' },
                 'Username*'
               ),
               _react2.default.createElement(
@@ -26545,7 +26565,7 @@ var EditStudent = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'li',
-                null,
+                { className: 'edit-title-name' },
                 'Password'
               ),
               _react2.default.createElement(
@@ -26555,7 +26575,7 @@ var EditStudent = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'li',
-                null,
+                { className: 'edit-title-name' },
                 'Retype Password*'
               ),
               _react2.default.createElement(
@@ -26565,7 +26585,7 @@ var EditStudent = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'li',
-                null,
+                { className: 'edit-title-name' },
                 'Edit Last Name*'
               ),
               _react2.default.createElement(
@@ -26575,7 +26595,7 @@ var EditStudent = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'li',
-                null,
+                { className: 'edit-title-name' },
                 'Edit First Name*'
               ),
               _react2.default.createElement(
@@ -26585,7 +26605,7 @@ var EditStudent = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'li',
-                null,
+                { className: 'edit-title-name' },
                 'Age'
               ),
               _react2.default.createElement(
@@ -26685,7 +26705,6 @@ var Filtered = function (_React$Component) {
   _createClass(Filtered, [{
     key: 'render',
     value: function render() {
-      console.log(this.props.filteredStudents);
       return (
         // <div>
         _react2.default.createElement(
@@ -26813,14 +26832,18 @@ var LoginForm = function (_Component) {
         }
       }
       return _react2.default.createElement(
-        'form',
-        { className: 'login-form', onSubmit: this.handleSubmit },
-        _react2.default.createElement('input', { type: 'text', id: 'username', value: this.state.username, required: 'true', placeholder: 'Username', onChange: this.handleChange }),
-        _react2.default.createElement('input', { type: 'password', id: 'password', value: this.state.password, required: 'true', placeholder: 'Password', onChange: this.handleChange }),
+        'div',
+        { className: 'login-form' },
         _react2.default.createElement(
-          'button',
-          { type: 'submit' },
-          'Log In'
+          'form',
+          { onSubmit: this.handleSubmit },
+          _react2.default.createElement('input', { className: 'form-control login-control', type: 'text', id: 'username', value: this.state.username, required: 'true', placeholder: 'Username', onChange: this.handleChange }),
+          _react2.default.createElement('input', { className: 'form-control login-control', type: 'password', id: 'password', value: this.state.password, required: 'true', placeholder: 'Password', onChange: this.handleChange }),
+          _react2.default.createElement(
+            'button',
+            { className: 'form-control login-control', type: 'submit' },
+            'Log In'
+          )
         )
       );
     }
@@ -28848,8 +28871,6 @@ var Signup = function (_React$Component) {
       }).catch(function (error) {
         console.log(error);
       });
-      console.log(_this.state);
-      // this.props.createUser(this.state);
       _this.setState({
         firstName: "",
         lastName: "",
@@ -28869,43 +28890,14 @@ var Signup = function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        { className: 'signup-form' },
+        'form',
+        { onSubmit: this.handleSubmit },
+        _react2.default.createElement('input', { type: 'text', className: 'form-control signup-control', id: 'username', required: 'true', value: this.state.username, placeholder: 'Create Username', onChange: this.handleSignUpForm }),
+        _react2.default.createElement('input', { type: 'password', className: 'form-control signup-control', id: 'password', required: 'true', value: this.state.password, placeholder: 'Create Password', onChange: this.handleSignUpForm }),
         _react2.default.createElement(
-          'div',
-          { className: 'create-account' },
-          _react2.default.createElement(
-            'div',
-            { className: 'create-title' },
-            ' Create Account '
-          ),
-          _react2.default.createElement(
-            'form',
-            { onSubmit: this.handleSubmit },
-            _react2.default.createElement(
-              'ul',
-              { className: 'sign-up-vertical' },
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement('input', { type: 'text', className: 'form-control signup-control', id: 'username', required: 'true', value: this.state.username, placeholder: 'Create Username', onChange: this.handleSignUpForm })
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement('input', { type: 'password', className: 'form-control signup-control', id: 'password', required: 'true', value: this.state.password, placeholder: 'Create Password', onChange: this.handleSignUpForm })
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'button',
-                  { className: 'submit-event', type: 'submit' },
-                  'Create Account'
-                )
-              )
-            )
-          )
+          'button',
+          { className: 'submit-event signup-control', type: 'submit' },
+          'Create Account'
         )
       );
     }

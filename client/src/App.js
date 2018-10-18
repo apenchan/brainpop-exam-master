@@ -9,6 +9,7 @@ class AppWrapper extends React.Component {
       <BrowserRouter>
         <div>
           <div className="container">
+          <h1 className="main-title">BrainPOP Exam</h1>
             <Routes/>
           </div>
         </div>

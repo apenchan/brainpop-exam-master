@@ -45,11 +45,13 @@ class LoginForm extends Component{
       {this.props.username}
     }
     return(
-      <form className="login-form" onSubmit={this.handleSubmit}>
-        <input type="text" id="username" value={this.state.username} required="true" placeholder="Username" onChange={this.handleChange}/>
-        <input type="password" id="password" value={this.state.password} required="true" placeholder="Password" onChange={this.handleChange}/>
-        <button type="submit">Log In</button>
+      <div className="login-form">
+      <form onSubmit={this.handleSubmit}>
+        <input className="form-control login-control" type="text" id="username" value={this.state.username} required="true" placeholder="Username" onChange={this.handleChange}/>
+        <input className="form-control login-control" type="password" id="password" value={this.state.password} required="true" placeholder="Password" onChange={this.handleChange}/>
+        <button className="form-control login-control" type="submit">Log In</button>
       </form>
+      </div>
     )
   }
 }
