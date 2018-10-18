@@ -109,10 +109,33 @@ td{
   height: 90%;
   border:1px solid black;
   position: absolute;
-  left: 25%;
-  right: 25%;
+  left: 30%;
+  right: 30%;
   top: 25%;
   bottom: 25%;
   margin: auto;
-  background: white;
+  background: #F3F3F3;
+}
+.edit-info-header{
+  font-family: sans-serif;
+}
+.input-edit{
+  border-radius: 5px;
+  width: 50%;
+  border:1px solid #cccccc;
+  border-width: 1px;
+  /* border-style: 1px solid white; */
+}
+.note{
+  font-size: 12px;
+}
+.btn-container{
+  text-align: center;
+}
+.form-btns{
+  text-align: center;
+  width: 100%;
+}
+.form-li{
+  display: inline-block;
 }

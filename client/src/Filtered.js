@@ -14,7 +14,7 @@ class Filtered extends React.Component{
       // <div>
       <table>
         {this.props.search != "" ? this.props.filteredStudents.map(function(student){
-          return <tr data-category={student} key={student} className="filtered-name"><td>{student.first_name} </td><td>{student.last_name}</td></tr>
+          return <tr data-category={student} key={student.id} className="filtered-name"><td>{student.first_name} </td><td>{student.last_name}</td></tr>
         }): ""}
 
       </table>
