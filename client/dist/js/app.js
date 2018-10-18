@@ -26280,9 +26280,13 @@ var StudentsListBox = function (_React$Component) {
           )
         ),
         _react2.default.createElement(
-          'button',
-          { type: 'button', className: 'edit-btn', value: this.props.id, id: this.props.id, onClick: this.editStudentInfo },
-          'Click me'
+          'td',
+          null,
+          _react2.default.createElement(
+            'button',
+            { type: 'button', className: 'edit-btn', value: this.props.id, id: this.props.id, onClick: this.editStudentInfo },
+            'Click me'
+          )
         ),
         this.state.showInfo == true ? _react2.default.createElement(_PopUp2.default, { showInfo: this.state.showInfo, studentInfo: this.state.studentInfo, mouseLeave: this.mouseLeave }) : "",
         this.state.editStudent == true ? _react2.default.createElement(_EditStudent2.default, { studentInfo: this.state.studentInfo, exitInfoBox: this.exitInfoBox }) : ""
@@ -26423,6 +26427,11 @@ var PopUp = function (_React$Component) {
             "li",
             null,
             data.first_name
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            data.age
           )
         );
       });
@@ -26466,6 +26475,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -26490,26 +26501,89 @@ var EditStudent = function (_React$Component) {
       return this.props.studentInfo.map(function (data, index) {
         return _react2.default.createElement(
           "div",
-          null,
+          { className: "popup-edit" },
           _react2.default.createElement(
-            "ul",
-            { key: index },
-            _react2.default.createElement("img", { onClick: _this2.props.exitInfoBox, src: "https://www.shareicon.net/data/128x128/2015/10/17/657408_cancel_512x512.png", className: "exit-edit-info" }),
+            "div",
+            { className: "popup_inner-edit" },
             _react2.default.createElement(
-              "li",
-              null,
-              data.username,
-              _react2.default.createElement("input", { type: "text", placeholder: data.username })
+              "ul",
+              { key: index },
+              _react2.default.createElement("img", { onClick: _this2.props.exitInfoBox, src: "https://www.shareicon.net/data/128x128/2015/10/17/657408_cancel_512x512.png", className: "exit-edit-info" }),
+              _react2.default.createElement(
+                "h3",
+                { className: "edit-info-header" },
+                "Edit Student Information"
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                "Username*"
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                _react2.default.createElement("input", { type: "text", placeholder: data.username })
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                "Password"
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                _react2.default.createElement("input", _defineProperty({ type: "text", placeholder: "Change Password" }, "type", "password"))
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                "Retype Password*"
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                _react2.default.createElement("input", _defineProperty({ type: "text", placeholder: "Retype Password" }, "type", "password"))
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                "Edit Last Name*"
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                _react2.default.createElement("input", { type: "text", placeholder: data.last_name })
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                "Edit First Name*"
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                _react2.default.createElement("input", { type: "text", placeholder: data.first_name })
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                "Age"
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                _react2.default.createElement("input", { type: "text", placeholder: data.age })
+              )
             ),
             _react2.default.createElement(
-              "li",
-              null,
-              data.last_name
+              "button",
+              { className: "submit-edits", type: "submit" },
+              "Submit"
             ),
             _react2.default.createElement(
-              "li",
-              null,
-              data.first_name
+              "button",
+              { type: "button", onClick: _this2.props.exitInfoBox },
+              "Cancel"
             )
           )
         );
@@ -26523,12 +26597,8 @@ var EditStudent = function (_React$Component) {
       console.log("I am student info", this.props.studentInfo);
       return _react2.default.createElement(
         "div",
-        { className: "popup" },
-        _react2.default.createElement(
-          "div",
-          { className: "popup_inner" },
-          this.editStudentInfo()
-        )
+        null,
+        this.editStudentInfo()
       );
     }
   }]);
