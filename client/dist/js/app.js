@@ -25955,30 +25955,38 @@ var DropdownBar = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (DropdownBar.__proto__ || Object.getPrototypeOf(DropdownBar)).call(this, props));
 
-    _this.state = {
-      selected: false,
-      classes: JSON.parse(localStorage.getItem('classes')) || []
-    };
-    return _this;
-  }
-  //here is where I should do my GET request
-
-
-  _createClass(DropdownBar, [{
-    key: 'componentWillMount',
-    value: function componentWillMount(classSubjects) {
-      var currentComponent = this;
+    _this.callBackClasses = function () {
+      var currentComponent = _this;
       var classesList = 'https://qa.brainpop.com/devtest/api/classes';
       _axios2.default.get(classesList).then(function (response) {
         console.log(response.data);
+        // localStorage.setItem("classTitle", JSON.stringify(response.data.name));
+        // localStorage.getItem('classTitle');
         localStorage.setItem("classes", JSON.stringify(response.data));
         localStorage.getItem('classes');
-        currentComponent.setState({ classes: response.data });
+        currentComponent.setState({ classes: response.data, classTitle: response.data.name });
         return classesList;
       }).catch(function (error) {
         console.log('Error fetching and parsing data', error);
       });
+    };
+
+    _this.state = {
+      selected: false,
+      classTitle: '',
+      // classTitle: JSON.parse(localStorage.getItem('classTitle')) || '',
+      classes: JSON.parse(localStorage.getItem('classes')) || []
+    };
+    return _this;
+  }
+
+  _createClass(DropdownBar, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.callBackClasses();
     }
+    //here is where I should do my GET request
+
   }, {
     key: 'render',
     value: function render() {
@@ -25988,7 +25996,7 @@ var DropdownBar = function (_React$Component) {
         _react2.default.createElement(
           'form',
           { className: 'dropdown-form' },
-          _react2.default.createElement(_ClassList2.default, { selected: this.state.selected, classes: this.state.classes })
+          _react2.default.createElement(_ClassList2.default, { callBackClasses: this.callBackClasses, value: this.state.classTitle, defaultOption: 'select class', selected: this.state.selected, classes: this.state.classes })
         )
       );
     }
@@ -26042,8 +26050,15 @@ var ClassList = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (ClassList.__proto__ || Object.getPrototypeOf(ClassList)).call(this, props));
 
+    _this.classesDropdown = function (e) {
+      // console.log(e.target.value);
+      console.log(e);
+      _this.props.callBackClasses(e);
+    };
+
     _this.handleChange = function (e, data) {
       var classes = _this.props.classes;
+      _this.classesDropdown(e.target.value);
       var className = 'https://qa.brainpop.com/devtest/api/classes/' + e.target.value + '/students';
       var xhr = new XMLHttpRequest();
       xhr.open('GET', className, true);
@@ -26075,6 +26090,7 @@ var ClassList = function (_React$Component) {
 
     _this.state = {
       students: JSON.parse(localStorage.getItem('students')) || [],
+      className: '',
       search: ''
     };
     return _this;
@@ -26096,13 +26112,44 @@ var ClassList = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      console.log(this.props);
+      // const makeDropDown = () => {
+      //   return this.props.classes.map(x => {
+      //     console.log(x)
+      //     return (
+      //       <option key={x.index} value={x.id}>
+      //         {x.name}
+      //       </option>
+      //     );
+      //   });
+      // };
+      var displayClass = function displayClass() {
+        return _this2.props.classes.map(function (data, index) {
+          return _react2.default.createElement(
+            'option',
+            { value: data.id, key: index },
+            data.name
+          );
+        });
+      };
       return _react2.default.createElement(
         'div',
-        { className: 'class-list' },
+        null,
         _react2.default.createElement(
-          'select',
-          { className: 'select-dropdown', onChange: this.handleChange },
-          this.displayClass()
+          'div',
+          { className: 'class-list' },
+          _react2.default.createElement(
+            'select',
+            { className: 'select-dropdown', value: this.props.value, onChange: this.handleChange },
+            _react2.default.createElement(
+              'option',
+              { value: '', disabled: true },
+              this.props.defaultOption
+            ),
+            displayClass()
+          )
         ),
         _react2.default.createElement(
           'div',
